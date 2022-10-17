@@ -1,4 +1,4 @@
-FROM node:17
+FROM python:3.9-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
