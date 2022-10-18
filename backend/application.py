@@ -1,5 +1,3 @@
-from typing import Union
-
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -55,3 +53,25 @@ def like_comment_in_post(post_id: int, comment_id: int):
 @app.delete("/comments")
 def delete_comment_in_post(post_id: int, comment_id: int):
     return None
+
+
+############### User Management Routes ###############
+
+@app.post("/user/new")
+def create_new_user(user):  # User object pending
+    pass
+
+
+@app.post("/user/change_password")
+def change_user_password(user):  # User object pending
+    pass
+
+
+@app.post("/logout")
+def login(user):  # User object pending
+    pass
+
+
+@app.post("/login")
+def logout(user):  # User object pending
+    pass
