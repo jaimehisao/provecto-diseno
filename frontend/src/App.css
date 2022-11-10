@@ -14,6 +14,12 @@ body {
 
 p {
   line-height: 1.4em;
+  color: #262626;
+}
+
+a {
+  text-decoration: none;
+  color: #262626;
 }
 
 .app {
@@ -175,6 +181,7 @@ button {
 
 .more_comments:hover {
   text-decoration: underline;
+  text-decoration-color: #262626;
   cursor: pointer;
 }
 
