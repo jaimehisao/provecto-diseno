@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-
+from .comment import Comment
+from typing import List
 
 class Post(BaseModel):
     id: int
@@ -8,3 +9,4 @@ class Post(BaseModel):
     image: str  # Link to where we store it? Or what would be the correct way of storing it in the db?
     user_id: int
     created_at: str
+    comments: List = []
