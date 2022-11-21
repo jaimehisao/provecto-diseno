@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
@@ -14,6 +16,7 @@ app = FastAPI()
 ############### Post Routes ###############
 @app.get("/posts/user")
 def get_all_posts_from_user(user_id: str):
+    logging.info("Getting all posts from user with id: " + user_id)
     posts = get_user_posts(user_id)
     return_posters = []
     if posts is None:
@@ -33,31 +36,41 @@ def get_all_posts_from_user(user_id: str):
 
 @app.get("/post/id")
 def get_post_by_id(post_id: int):
-    return JSONResponse(content=jsonable_encoder(get_post_by_id(post_id)))
+    success = get_post_by_id(post_id)
+    if success is None:
+        return JSONResponse(status_code=404, content="Post not found")
+    return JSONResponse(content=jsonable_encoder(success))
 
 
 @app.post("/post/new")
 def create_new_post_endpoint(post: Post):
-    create_new_post(post)
-    return JSONResponse(status_code=200, content="Post created")
+    success = create_new_post(post)
+    if success:
+        return JSONResponse(status_code=201, content="Post created")
+    return JSONResponse(status_code=500, content="Post not created")
 
 
 @app.post("/post/like")
 def like_post_endpoint(post_id: int):
-    like_post(post_id)
-    return JSONResponse(status_code=200, content="Post liked")
+    success = like_post(post_id)
+    if success:
+        return JSONResponse(status_code=200, content="Post liked")
+    return JSONResponse(status_code=404, content="Post not found")
 
 
 @app.post("/post/unlike")
 def dislike_post_endpoint(post_id: int):
-    unlike_post(post_id)
-    return JSONResponse(status_code=200, content="Post unliked")
+    success = unlike_post(post_id)
+    if success:
+        return JSONResponse(status_code=200, content="Post unliked")
+    return JSONResponse(status_code=404, content="Post not found")
 
 
 @app.delete("/post/delete")
 def delete_post_endpoint(post_id: str):
-    delete_post(post_id)
-    return JSONResponse(status_code=200, content="Post deleted")
+    success = delete_post(post_id)
+    if success:
+        return JSONResponse(status_code=200, content="Post deleted")
 
 
 ############### Comment Routes ###############
