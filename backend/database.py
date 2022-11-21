@@ -28,3 +28,24 @@ def create_new_post(post: Post):
 def create_new_comment_in_post(post: Post, comment: Comment):
     post.comments.append(comment)
     return post_db.update_one({"id": post.id}, post)
+
+
+def like_post(post_id):
+    post = post_db.find_one({"id": post_id})
+    # case where post not found
+    post['likes'] = post['likes']+1
+    post['liked_by'].append("NONE")  # TODO append user id of person that like the post
+    post_db.update_one({"id": post.id}, post)
+
+
+def unlike_post(post_id):
+    post = post_db.find_one({"id": post_id})
+    # TODO pop user from list
+    post['likes'] = post['likes'] + 1
+    post_db.update_one({"id": post.id}, post)
+
+
+def create_new_comment(post_id, comment: Comment):
+    post = post_db.find_one({"id": post_id})
+    # case where post not found
+    post['comment'].append(comment)
