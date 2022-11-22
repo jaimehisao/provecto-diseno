@@ -26,7 +26,9 @@ jobs:
   push_to_registry_frontend:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    working-directory: ./frontend
+    defaults:
+      run:
+        working-directory: ./frontend
     # build docker image and push to docker hub
     # only if the app build and test successfully
     needs: [ build_test ]
@@ -58,7 +60,9 @@ jobs:
   push_to_registry_backend:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    working-directory: ./backend
+    defaults:
+      run:
+        working-directory: ./backend
     # build docker image and push to docker hub
     # only if the app build and test successfully
     needs: [ build_test ]
