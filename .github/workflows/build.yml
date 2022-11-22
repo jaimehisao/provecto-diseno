@@ -13,10 +13,12 @@ jobs:
     defaults:
       run:
         working-directory: /frontend
+
     # build docker image and push to docker hub
     # only if the app build and test successfully
 
     steps:
+      - run: ls
       - name: checkout repo
         uses: actions/checkout@v2
 
