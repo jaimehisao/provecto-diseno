@@ -18,7 +18,6 @@ jobs:
     # only if the app build and test successfully
 
     steps:
-      - run: ls
       - name: checkout repo
         uses: actions/checkout@v2
 
