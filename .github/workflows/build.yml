@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: /frontend
+        working-directory: ./frontend
 
     # build docker image and push to docker hub
     # only if the app build and test successfully
