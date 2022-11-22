@@ -37,7 +37,6 @@ jobs:
         with:
           push: true # Will only build if this is not here
           tags: |
-                  ghcr.io/exchange-a-gram-front:${{ github.ref }}
                   ghcr.io/exchange-a-gram-front:latest
 
   push_to_registry_backend:
@@ -71,5 +70,4 @@ jobs:
         with:
             push: true # Will only build if this is not here
             tags: |
-              ghcr.io/exchange-a-gram-back:${{ github.ref }}
               ghcr.io/exchange-a-gram-back:latest
