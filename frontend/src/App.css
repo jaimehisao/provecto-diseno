@@ -1,224 +1,378 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
-    font-size: medium;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Helvetica, Arial, sans-serif;
+	font-size: medium;
 }
 body {
-  color: #262626;
-  font-size: 14px;
-  line-height: 18px;
+	color: #262626;
+	font-size: 14px;
+	line-height: 18px;
 }
 
 p {
-  line-height: 1.4em;
-  color: #262626;
+	line-height: 1.4em;
+	color: #262626;
 }
 
 a {
-  text-decoration: none;
-  color: #262626;
+	text-decoration: none;
+	color: #262626;
 }
 
 .app {
-  background-color: #fafafa;
-  min-height: 100vh;
+	background-color: #fafafa;
+	min-height: 100vh;
 }
 .app__header {
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  background-color: white;
-  height: 54px;
-  display: flex;
-  align-items: center;
-  object-fit: contain;
-  border-bottom: 1px solid lightgray;
+	position: sticky;
+	top: 0;
+	z-index: 9999;
+	background-color: white;
+	height: 54px;
+	display: flex;
+	align-items: center;
+	object-fit: contain;
+	border-bottom: 1px solid lightgray;
 }
 .app__headerWrapper {
-  max-width: 975px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	max-width: 975px;
+	margin: 0 auto;
+	width: 100%;
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 .app__headerButtons {
-  display: flex;
-  column-gap: 15px;
+	display: flex;
+	column-gap: 15px;
 }
 
 button {
-  font-size: 14px;
-  line-height: 18px;
-  cursor: pointer;
-  border: 1px solid transparent;
+	font-size: 14px;
+	line-height: 18px;
+	cursor: pointer;
+	border: 1px solid transparent;
 }
+
+input[type="submit"] {
+	font-size: 14px;
+	line-height: 18px;
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+
 .primary__button {
-  background-color: #0095f6;
-  border-radius: 4px;
-  color: #fff;
-  padding: 5px 9px;
-  font-weight: 600;
-  text-align: center;
+	background-color: #0095f6;
+	border-radius: 4px;
+	color: #fff;
+	padding: 5px 9px;
+	font-weight: 600;
+	text-align: center;
 }
 .text__button {
-  color: #0095f6;
-  font-weight: 600;
-  line-height: 28px;
-  background-color: transparent;
+	color: #0095f6;
+	font-weight: 600;
+	line-height: 28px;
+	background-color: transparent;
 }
 .app__signUp {
-  display: flex;
-  flex-direction: column;
-  margin: 28px 0;
-  row-gap: 15px;
+	display: flex;
+	flex-direction: column;
+	margin: 28px 0;
+	row-gap: 15px;
 }
 
 .app__body {
-  min-height: calc(100vh - 54px);
-  max-width: 975px;
-  margin: 0 auto;
-  /* padding-bottom: 25px; */
-  width: 100%;
-  background-color:#fff;
-  border: 1px solid lightgray;
-  border-top: 0;
+	min-height: calc(100vh - 54px);
+	max-width: 975px;
+	margin: 0 auto;
+	/* padding-bottom: 25px; */
+	width: 100%;
+	background-color: #fff;
+	border: 1px solid lightgray;
+	border-top: 0;
 }
 
 .post {
-  border-bottom: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
 }
 
 .post__header {
-  height: 80px;
-  background-color: #fdfdfd;
-  padding: 10px 10px;
+	height: 80px;
+	background-color: #fdfdfd;
+	padding: 10px 10px;
 }
 
 .post__avatar {
-  height: 100%;
-  width: auto;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-  float: left;
+	height: 100%;
+	width: auto;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 10px;
+	float: left;
 }
 
 .post__user {
-  line-height: 60px;
-  font-weight: 600;
-  font-size: 17px;
+	line-height: 60px;
+	font-weight: 600;
+	font-size: 17px;
 }
 
 .post__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .post__footer {
-  padding: 10px 10px;
+	padding: 10px 10px;
 }
 
 .likes {
-  font-weight: 600;
-  line-height: 18px;
-  margin-bottom: 5px;
-  height: 24px;
-  color: #010022;
-  /* line-height: 12px; */
+	font-weight: 600;
+	line-height: 18px;
+	margin-bottom: 5px;
+	height: 24px;
+	color: #010022;
+	/* line-height: 12px; */
 }
 
 .likes__icon {
-  height: 24px;
-  width: auto;
-  margin-right: 10px;
-  float: left;
+	height: 24px;
+	width: auto;
+	margin-right: 10px;
+	float: left;
 }
 
 .liked .st0 {
-  fill: rgb(247, 80, 122);
+	fill: rgb(247, 80, 122);
 }
 
 .comments__count {
-  font-size: 14px;
-  line-height: 18px;
-  color: #010022;
-  margin-bottom: 5px;
+	font-size: 14px;
+	line-height: 18px;
+	color: #010022;
+	margin-bottom: 5px;
 }
 
 .post__comments {
-  font-size: 14px;
-  line-height: 18px;
-  margin: 10px 0;
+	font-size: 14px;
+	line-height: 18px;
+	margin: 10px 0;
 }
 
 .comment {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .commenter {
-  font-weight: 600;
-  margin-right: 5px;
-  float: left;
+	font-weight: 600;
+	margin-right: 5px;
+	float: left;
 }
 
 .commenter::after {
-  content: ": ";
+	content: ": ";
 }
 
 .more_comments {
-  font-size: 14px;
-  line-height: 18px;
-  color: #0095f6;
-  font-weight: 600;
-  margin: 10px 0;
+	font-size: 14px;
+	line-height: 18px;
+	color: #0095f6;
+	font-weight: 600;
+	margin: 10px 0;
 }
 
 .more_comments:hover {
-  text-decoration: underline;
-  text-decoration-color: #262626;
-  cursor: pointer;
+	text-decoration: underline;
+	text-decoration-color: #262626;
+	cursor: pointer;
 }
 
 .comment__form form {
-  margin-top: 15px;
-  display: flex;
-  width: 100%;
+	margin-top: 15px;
+	display: flex;
+	width: 100%;
 }
 
-.comment__form input[type=text] {
-  border: 1px solid lightgray;
-  border-radius: 15px 0 0 15px;
-  padding: 5px 10px;
-  font-size: 14px;
-  line-height: 18px;
-  width: 90%;
+.comment__form input[type="text"] {
+	border: 1px solid lightgray;
+	border-radius: 15px 0 0 15px;
+	padding: 5px 10px;
+	font-size: 14px;
+	line-height: 18px;
+	width: 90%;
 }
 
-.comment__form input[type=submit] {
-  background-color: #0095f6;
-  border-radius: 4px;
-  color: #fff;
-  padding: 5px 9px;
-  font-weight: 600;
-  text-align: center;
-  display: inline-block;
-  border: 0;
-  border-radius: 0 15px 15px 0;
-  width: auto;
+.comment__form input[type="submit"] {
+	background-color: #0095f6;
+	border-radius: 4px;
+	color: #fff;
+	padding: 5px 9px;
+	font-weight: 600;
+	text-align: center;
+	display: inline-block;
+	border: 0;
+	border-radius: 0 15px 15px 0;
+	width: auto;
 }
 
-.comment__form input[type=submit]:hover {
-  cursor: pointer;
+.comment__form input[type="submit"]:hover {
+	cursor: pointer;
 }
-
 
 img {
-  width: 200px;
-  height: 50px;
+	width: 200px;
+	height: 50px;
+}
+
+.login__container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	height: 100vh;
+	padding-top: 50px;
+}
+
+.input__label {
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 600;
+	margin-bottom: 15px;
+}
+
+.login__container h1 {
+	font-size: 40px;
+	margin-bottom: 20px;
+	margin: 50px;
+}
+
+.username__input {
+	border: 1px solid lightgray;
+	border-radius: 15px 0 0 15px;
+	padding: 5px 10px;
+	font-size: 14px;
+	line-height: 18px;
+	width: 70%;
+	height: auto;
+}
+
+.login__button {
+	background-color: #0095f6;
+	border-radius: 4px;
+	color: #fff;
+	padding: 5px 9px;
+	font-weight: 600;
+	text-align: center;
+	display: inline-block;
+	border: 0;
+	border-radius: 0 15px 15px 0;
+	width: auto;
+	height: 31px;
+}
+
+.username__header {
+	font-size: 20px;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.footer {
+	height: 53px;
+	background-color: #02000c;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	object-fit: contain;
+	text-align: center;
+}
+
+.footer__wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+	justify-content: center;
+	padding: 0 auto;
+	height: 100%;
+}
+
+.upload {
+	/* width: 27px; */
+	height: 27px;
+	border-radius: 4px;
+	font-size: large;
+	/* font-weight: bold; */
+	vertical-align: middle;
+	/* text-align: center; */
+	/* align-items: baseline; */
+	padding: 8px;
+	line-height: 0;
+}
+
+.upload__page {
+	padding-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.upload__wrapper {
+	align-self: center;
+}
+
+.upload__wrapper h1 {
+	font-size: 40px;
+	margin-bottom: 20px;
+	margin: 50px;
+}
+
+.upload__form form {
+	margin-top: auto;
+	display: flex;
+	width: 100%;
+}
+
+.upload__form textarea {
+	border: 1px solid lightgray;
+	border-radius: 15px 15px;
+	padding: 5px 10px;
+	font-size: 14px;
+	line-height: 18px;
+	width: 100%;
+	margin: 20px 0;
+	height: auto;
+	resize: none;
+}
+
+.upload__form input[type="submit"] {
+	float: right;
+	width: 48%;
+	height: auto;
+}
+
+.upload__form input[type="submit"]:hover {
+	cursor: pointer;
+}
+
+.upload__form input[type="file"] {
+	display: none;
+}
+
+.upload__form .file__input {
+	font-size: 25px;
+}
+
+.cancel__button {
+	background-color: #d3d3d3;
+	border-radius: 4px;
+	color: rgb(20, 20, 20);
+	padding: 5px 9px;
+	font-weight: 600;
+	text-align: center;
+	width: 48%;
 }
