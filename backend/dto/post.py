@@ -2,11 +2,11 @@ from pydantic import BaseModel
 from .comment import Comment
 from typing import List
 
+
 class Post(BaseModel):
     id: int
-    location: str
     body: str
-    image: str  # Link to where we store it? Or what would be the correct way of storing it in the db?
+    image_path: str  # Path
     user_id: int
     created_at: str
     comments: List = []

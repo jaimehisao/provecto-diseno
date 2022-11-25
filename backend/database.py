@@ -23,18 +23,13 @@ def get_user_posts(user_id: str):
 
 def get_post_by_id(post_id: str):
     logging.info("Getting post with id: " + post_id)
-    return post_db.find_one({"id": post_id})
-
-
-def create_new_post(post: Post):
-    logging.info("Creating new post")
-    return post_db.insert_one(post)
-
-
-def delete_post(post_id: str):
-    logging.info("Deleting post with id: " + post_id)
-    # TODO validate post ownership
-    post_db.delete_one({"id": post_id})
+    post = post_db.find_one({"id": post_id})
+    post = Post(post_id=post['id'],
+                body=post['body'],
+                image_path=post['image'],
+                user_id=post['user_id'],
+                created_at=post['created_at'])
+    return post
 
 
 def create_new_comment_in_post(post: Post, comment: Comment):
@@ -48,16 +43,17 @@ def like_post(post_id):
     post = post_db.find_one({"id": post_id})
     # case where post not found
     post['likes'] = post['likes']+1
-    post['liked_by'].append("NONE")  # TODO append user id of person that like the post
     post_db.update_one({"id": post.id}, post)
 
 
 def unlike_post(post_id):
     logging.info("Unliking post with id: " + post_id)
     post = post_db.find_one({"id": post_id})
-    # TODO pop user from list
-    post['likes'] = post['likes'] - 1
-    post_db.update_one({"id": post.id}, post)
+    if post['likes'] > 0:
+        post['likes'] = post['likes'] - 1
+        post_db.update_one({"id": post.id}, post)
+        return
+    logging.info("Post has no likes")
 
 
 def create_new_comment(post_id, comment: Comment):
@@ -65,3 +61,16 @@ def create_new_comment(post_id, comment: Comment):
     post = post_db.find_one({"id": post_id})
     # case where post not found
     post['comment'].append(comment)
+
+
+"""
+def create_new_post(post: Post):
+    logging.info("Creating new post")
+    return post_db.insert_one(post)
+
+
+def delete_post(post_id: str):
+    logging.info("Deleting post with id: " + post_id)
+    # TODO validate post ownership
+    post_db.delete_one({"id": post_id})
+"""

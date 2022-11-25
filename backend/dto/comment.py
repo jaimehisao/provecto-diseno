@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class Comment(BaseModel):
-    id: int
     body: str
     user_id: int
     post_id: int
