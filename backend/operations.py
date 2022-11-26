@@ -86,7 +86,7 @@ def create_new_post(post: Post):
     post_upsert(post)
 
 
-def save_image(image_path: str, contents):
+def save_image(image_path, contents):
     logging.info("Saving image with path: " + image_path)
     new_name = str(uuid.uuid4())
     new_path = "images/" + new_name

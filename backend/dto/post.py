@@ -16,3 +16,4 @@ class Post(BaseModel):
 class PostUpload(BaseModel):
     body: str
     user_id: str
+    image_name: str

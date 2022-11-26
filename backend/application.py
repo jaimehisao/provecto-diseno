@@ -158,23 +158,32 @@ def create_new_comment_in_post_endpoint(item: CommentBody):
     return JSONResponse(status_code=404, content="Adding comment failed")
 
 
+image_name = None
+
+
 @app.post("/post/new")
-def create_new_post_endpoint(post_upload: PostUpload, file: UploadFile = File(...)):
+def create_new_post_endpoint(post_upload: PostUpload):
     _id = str(uuid.uuid4())
-    new_name = str(uuid.uuid4()) + ".jpg"
-    post_upload.image_path = new_name
     post = Post(
         id=_id,
         body=post_upload.body,
-        image_path=post_upload.image_path,
+        image_path=post_upload.image_name,
         user_id=post_upload.user_id,
         created_at=str(datetime.date.today()),
         likes=0,
         comments=[]
     )
     success = post_upsert(post)
-    contents = file.read()
-    save_image(new_name, contents)
+    global image_name
+    image_name = post_upload.image_name
     if success:
-        return JSONResponse(status_code=201, content="Post created")
+        return JSONResponse(status_code=200, content="Post created")
     return JSONResponse(status_code=500, content="Post not created")
+
+
+@app.post("/post/new/image")
+def add_image_to_new_post(file: UploadFile = File(...)):
+    contents = file.read()
+    global image_name
+    save_image(image_name, contents)
+    return JSONResponse(status_code=200, content="Image Added")
