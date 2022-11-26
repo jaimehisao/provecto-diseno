@@ -15,7 +15,7 @@ def get_post_by_id(post_id: str) -> Post or None:
     :return: The Post object with the given ID.
     """
     logging.info("Getting post with id: " + post_id)
-    post = get_post_by_id_db
+    post = get_post_by_id_db(post_id)
     if post is None:
         return None
     return post
@@ -43,20 +43,26 @@ def like_post(post_id: str):
     post = get_post_by_id_db(post_id)
     if post is None:
         return False   # In case of an unnsucesful operation
-    convert_post_to_dict(post)
+    post = convert_post_to_dict(post)
     post["likes"] = post["likes"] + 1
+    print(post)
     update_post(post)
     return True  # If operation is successful
 
 
-def unlike_post(post_id: str) -> None:
+def unlike_post(post_id: str):
     logging.info("Unliking post with id: " + post_id)
-    post = post_db.find_one({"id": post_id})
+    post = get_post_by_id_db(post_id)
+    if post is None:
+        return False   # In case of an unnsucesful operation
+    post = convert_post_to_dict(post)
     if post["likes"] > 0:
         post["likes"] = post["likes"] - 1
         update_post(post)
-        return
+        print(post)
+        return True  # If operation is successful
     logging.info("Post has no likes")
+    return True  # If operation is successful
 
 
 def create_new_comment(post_id, comment: Comment):

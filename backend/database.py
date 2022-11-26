@@ -14,12 +14,14 @@ user_db = database["users"]
 
 
 def convert_post_to_dict(post: Post):
-    new_comments = []
-    for comment in post.comments:
-        new_comments.append(comment.dict())
-    post.comments = new_comments
-    dict_post = dict(post)
-    return dict_post
+    if type(post) is not dict:
+        new_comments = []
+        for comment in post.comments:
+            new_comments.append(dict(comment))
+        post.comments = new_comments
+        dict_post = dict(post)
+        return dict_post
+    return post
 
 
 def get_post_by_id_db(post_id: str):
@@ -29,13 +31,12 @@ def get_post_by_id_db(post_id: str):
 
 
 def update_post(post: Post):
-    logging.info("Updating post with id: " + post.id)
     post = convert_post_to_dict(post)
-    post_db.update_one({"_id": post["id"]}, post)
+    logging.info("Updating post with id: " + post["id"])
+    post_db.replace_one({"_id": post["id"]}, post)
 
 
 def post_upsert(post: Post):
     logging.info("Upserting post with id: " + post.id)
     post = convert_post_to_dict(post)
-    dict_post = convert_post_to_dict(post)
-    post_db.replace_one({"_id": dict_post["id"]}, dict_post, upsert=True)
+    post_db.replace_one({"_id": post["id"]}, post, upsert=True)
