@@ -6,7 +6,7 @@ from dto.comment import Comment
 import logging
 
 # client = MongoClient("mongo", 27017)
-client = MongoClient("localhost", port=27017, username="root", password="admin")
+client = MongoClient("mongo", port=27017, username="root", password="admin")
 # client = MongoClient('mongo', 27017)
 # database
 database = client["exchangeagram"]
