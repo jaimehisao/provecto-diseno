@@ -11,6 +11,8 @@ import Upload from "./Upload";
 
 import UserProfile from "./UserProfile";
 
+import Axios from "axios";
+
 class App extends React.Component {
 	render() {
 		if (sessionStorage.getItem("logged") === "true") {

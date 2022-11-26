@@ -148,6 +148,10 @@ input[type="submit"] {
 	float: left;
 }
 
+button.likes__icon {
+	background-color: #fff;
+}
+
 .liked .st0 {
 	fill: rgb(247, 80, 122);
 }
@@ -375,4 +379,8 @@ img {
 	font-weight: 600;
 	text-align: center;
 	width: 48%;
+}
+
+.home {
+	padding-bottom: 53px;
 }
