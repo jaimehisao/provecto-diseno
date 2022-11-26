@@ -1,4 +1,4 @@
-# Instagram 
+# Exchange-o-gram
 
 Para buildear el proyecto se debe correr
 `docker-compose build`
