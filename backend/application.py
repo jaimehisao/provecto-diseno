@@ -164,6 +164,7 @@ image_name = None
 @app.post("/post/new")
 def create_new_post_endpoint(post_upload: PostUpload):
     _id = str(uuid.uuid4())
+    # print("Creating new post with id: " + str(dict(post_upload)))
     post = Post(
         id=_id,
         body=post_upload.body,
@@ -173,6 +174,7 @@ def create_new_post_endpoint(post_upload: PostUpload):
         likes=0,
         comments=[]
     )
+    # print("Post: " + str(dict(post)))
     success = post_upsert(post)
     global image_name
     image_name = post_upload.image_name

@@ -6,7 +6,7 @@ from dto.comment import Comment
 import logging
 
 # client = MongoClient("mongo", 27017)
-client = MongoClient("mongo", port=27017, username="root", password="admin")
+client = MongoClient("localhost", port=27017, username="root", password="admin")
 # client = MongoClient('mongo', 27017)
 # database
 database = client["exchangeagram"]
@@ -50,3 +50,4 @@ def post_upsert(post: Post):
     logging.info("Upserting post with id: " + post.id)
     post = convert_post_to_dict(post)
     post_db.replace_one({"_id": post["id"]}, post, upsert=True)
+    return True
