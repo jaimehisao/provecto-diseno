@@ -184,7 +184,7 @@ def create_new_post_endpoint(post_upload: PostUpload):
 
 
 @app.post("/post/new/image")
-def add_image_to_new_post(file: UploadFile = File(...)):
+def add_image_to_new_post(file: UploadFile):
     contents = file.read()
     global image_name
     save_image(image_name, contents)
