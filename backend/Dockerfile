@@ -9,4 +9,4 @@ COPY . .
 
 #EXPOSE 8080
 CMD ["python3", "populate_db.py"]
-CMD ["uvicorn", "application:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "application:app", "--host", "0.0.0.0", "--port", "4000"]
