@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 
 from operations import get_post_by_id, like_post, create_new_comment, unlike_post, get_all_posts
@@ -12,6 +13,20 @@ from dto.post import Post
 from dto.comment import Comment
 
 app = FastAPI()
+
+origins = [
+    "https://react-frontend",
+    "http://localhost",
+    "http://localhost:6000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 ############### Post Routes ###############
