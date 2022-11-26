@@ -3,9 +3,15 @@ from pymongo import MongoClient
 from dto.post import Post
 from dto.comment import Comment
 
-from database import get_post_by_id_db, convert_post_to_dict, update_post, post_upsert
+from database import get_post_by_id_db, convert_post_to_dict, update_post, post_upsert, get_all_posts_db
 
 import logging
+
+
+def get_all_posts():
+    logging.info("Getting all posts")
+    posts = get_all_posts_db()
+    return posts
 
 
 def get_post_by_id(post_id: str) -> Post or None:

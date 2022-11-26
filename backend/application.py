@@ -7,7 +7,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import FileResponse
 
 
-from operations import get_post_by_id, like_post, create_new_comment, unlike_post
+from operations import get_post_by_id, like_post, create_new_comment, unlike_post, get_all_posts
 from dto.post import Post
 from dto.comment import Comment
 
@@ -15,29 +15,6 @@ app = FastAPI()
 
 
 ############### Post Routes ###############
-@app.get("/posts/user/{user_id}")
-def get_all_posts_from_user(user_id: str):
-    """
-    Retrieve all posts from a user
-    :param user_id: user ID from which posts will be retrieved
-    :return: returns an object with the user's posts (except images)
-    """
-    logging.info("Getting all posts from user with id: " + user_id)
-    posts = get_user_posts(user_id)
-    return_posters = []
-    if posts is None:
-        return JSONResponse(status_code=404, content="User has no posts.")
-    for post in posts:
-        tmp = Post()
-        tmp.id = post["id"]
-        tmp.body = post["body"]
-        tmp.image_path = post["image"]
-        tmp.user_id = post["user_id"]
-        tmp.created_at = post["created_at"]
-        return_posters.append(tmp)
-    return JSONResponse(content=jsonable_encoder(return_posters))
-
-
 # LGTM
 @app.get("/post/image/{image_path}")
 def get_image_path(image_path: str):
@@ -48,6 +25,17 @@ def get_image_path(image_path: str):
     """
     logging.info("Getting image path: " + image_path)
     return FileResponse("images/" + image_path)
+
+
+@app.get("/posts")
+def get_all_posts_endpoint():
+    """
+    Returns all the posts in the database.
+    :return: List of posts.
+    """
+    logging.info("Getting all posts")
+    posts = get_all_posts()
+    return JSONResponse(content=jsonable_encoder(posts))
 
 
 # LGTM
@@ -97,6 +85,26 @@ def create_new_post_endpoint(post: Post):
     if success:
         return JSONResponse(status_code=201, content="Post created")
     return JSONResponse(status_code=500, content="Post not created")
+    
+@app.get("/posts/user/{user_id}")
+def get_all_posts_from_user(user_id: str):
+    Retrieve all posts from a user
+    :param user_id: user ID from which posts will be retrieved
+    :return: returns an object with the user's posts (except images)
+    logging.info("Getting all posts from user with id: " + user_id)
+    posts = get_user_posts(user_id)
+    return_posters = []
+    if posts is None:
+        return JSONResponse(status_code=404, content="User has no posts.")
+    for post in posts:
+        tmp = Post()
+        tmp.id = post["id"]
+        tmp.body = post["body"]
+        tmp.image_path = post["image"]
+        tmp.user_id = post["user_id"]
+        tmp.created_at = post["created_at"]
+        return_posters.append(tmp)
+    return JSONResponse(content=jsonable_encoder(return_posters))
 """
 
 
