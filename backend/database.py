@@ -5,7 +5,11 @@ from dto.comment import Comment
 
 import logging
 
-client = MongoClient("localhost", 27017)
+# client = MongoClient("mongo", 27017)
+client = MongoClient('mongo',
+                     port=27017,
+                     username='root',
+                     password='admin')
 # client = MongoClient('mongo', 27017)
 # database
 database = client["exchangeagram"]
@@ -22,6 +26,15 @@ def convert_post_to_dict(post: Post):
         dict_post = dict(post)
         return dict_post
     return post
+
+
+def get_all_posts_db():
+    logging.info("Getting all posts from DB")
+    posts = post_db.find()
+    posts_list = []
+    for post in posts:
+        posts_list.append(Post.parse_obj(post))
+    return posts_list
 
 
 def get_post_by_id_db(post_id: str):
