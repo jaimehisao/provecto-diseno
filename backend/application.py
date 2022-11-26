@@ -173,7 +173,7 @@ def create_new_post_endpoint(post_upload: PostUpload, file: UploadFile = File(..
         comments=[]
     )
     success = post_upsert(post)
-    contents = await file.read()
+    contents = file.read()
     save_image(new_name, contents)
     if success:
         return JSONResponse(status_code=201, content="Post created")
