@@ -1,18 +1,22 @@
 version: '3.8'
 services:
-  express-backend:
+  python-backend:
     build: ./backend
-    container_name: express-backend
+    container_name: python-backend
     ports:
       - '4000:4000'
-    volumes:
-      - ./express-backend:/app
-      - ./app/node_modules
   react-frontend:
     build: ./frontend
     container_name: react-frontend
     ports:
-      - '5000:5000'
+      - '6000:6000'
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - '27017:27017'
     volumes:
-      - ./react-frontend:/app
-      - ./app/node_modules
+      - ./mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
