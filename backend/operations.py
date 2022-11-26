@@ -88,8 +88,7 @@ def create_new_post(post: Post):
 
 def save_image(image_path, contents):
     logging.info("Saving image with path: " + image_path)
-    new_name = str(uuid.uuid4())
-    new_path = "images/" + new_name
+    new_path = "images/" + image_path
     with open(new_path, "wb") as f:
         f.write(contents)
 
