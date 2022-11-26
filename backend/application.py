@@ -1,7 +1,8 @@
 import logging
 import datetime
+import uuid
 
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, UploadFile, File
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import FileResponse
@@ -9,9 +10,18 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
 
-from operations import get_post_by_id, like_post, create_new_comment_in_post, unlike_post, get_all_posts
+from operations import (
+    save_image,
+    post_upsert,
+    get_post_by_id,
+    like_post,
+    create_new_comment_in_post,
+    unlike_post,
+    get_all_posts,
+)
 from dto.comment_body import CommentBody
 from dto.comment import Comment
+from dto.post import Post, PostUpload
 
 app = FastAPI()
 
@@ -141,8 +151,30 @@ def create_new_comment_in_post_endpoint(item: CommentBody):
             post_id=item.post_id,
             created_at=str(datetime.date.today()),
             likes=0,
-        )
+        ),
     )
     if success:
         return JSONResponse(status_code=200, content="Comment added")
     return JSONResponse(status_code=404, content="Adding comment failed")
+
+
+@app.post("/post/new")
+def create_new_post_endpoint(post_upload: PostUpload, file: UploadFile = File(...)):
+    _id = str(uuid.uuid4())
+    new_name = str(uuid.uuid4()) + ".jpg"
+    post_upload.image_path = new_name
+    post = Post(
+        id=_id,
+        body=post_upload.body,
+        image_path=post_upload.image_path,
+        user_id=post_upload.user_id,
+        created_at=str(datetime.date.today()),
+        likes=0,
+        comments=[]
+    )
+    success = post_upsert(post)
+    contents = await file.read()
+    save_image(new_name, contents)
+    if success:
+        return JSONResponse(status_code=201, content="Post created")
+    return JSONResponse(status_code=500, content="Post not created")
