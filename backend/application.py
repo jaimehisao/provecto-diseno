@@ -1,15 +1,16 @@
 import logging
 import datetime
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
+from pydantic import BaseModel
 
-from operations import get_post_by_id, like_post, create_new_comment, unlike_post, get_all_posts
-from dto.post import Post
+from operations import get_post_by_id, like_post, create_new_comment_in_post, unlike_post, get_all_posts
+from dto.comment_body import CommentBody
 from dto.comment import Comment
 
 app = FastAPI()
@@ -120,8 +121,8 @@ def get_all_posts_from_user(user_id: str):
 
 
 ############### Comment Routes ###############
-@app.post("/post/{post_id}/comments/add")
-def create_new_comment_in_post(post_id: str, user_id: str, comment_body: str):
+@app.post("/post/comments/add")
+def create_new_comment_in_post_endpoint(item: CommentBody):
     """
     Adds new comment to an existing post
     :param post_id: Post ID to add the comment to
@@ -129,14 +130,18 @@ def create_new_comment_in_post(post_id: str, user_id: str, comment_body: str):
     :param comment_body: Text of the comment
     :return: T/F depending on success
     """
-    success = create_new_comment(
-        post_id,
+    print("Adding comment to post: " + item.post_id)
+    print("Comment body: " + item.comment_body)
+    print("User ID: " + item.user_id)
+    success = create_new_comment_in_post(
+        item.post_id,
         Comment(
-            body=comment_body,
-            user_id=user_id,
-            created_at=datetime.date.today(),
+            body=item.comment_body,
+            user_id=item.user_id,
+            post_id=item.post_id,
+            created_at=str(datetime.date.today()),
             likes=0,
-        ),
+        )
     )
     if success:
         return JSONResponse(status_code=200, content="Comment added")
