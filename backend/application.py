@@ -2,14 +2,13 @@ import logging
 import datetime
 import uuid
 
-from fastapi import FastAPI, Body, File
+from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
-from starlette.datastructures import UploadFile
 
 from operations import (
     save_image,
