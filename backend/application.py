@@ -25,7 +25,7 @@ from dto.post import Post, PostUpload
 
 app = FastAPI()
 
-origins = ["*"]
+origins = ["http://localhost:4000"]
 
 app.add_middleware(
     CORSMiddleware,
