@@ -11,3 +11,8 @@ class Post(BaseModel):
     created_at: str
     likes: int
     comments: List = []
+
+
+class PostUpload(BaseModel):
+    body: str
+    user_id: str

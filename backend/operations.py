@@ -2,7 +2,7 @@ from pymongo import MongoClient
 
 from dto.post import Post
 from dto.comment import Comment
-
+import uuid
 from database import get_post_by_id_db, convert_post_to_dict, update_post, post_upsert, get_all_posts_db
 
 import logging
@@ -84,6 +84,14 @@ def create_new_post(post: Post):
     logging.info("Creating new post")
     print(post)
     post_upsert(post)
+
+
+def save_image(image_path: str, contents):
+    logging.info("Saving image with path: " + image_path)
+    new_name = str(uuid.uuid4())
+    new_path = "images/" + new_name
+    with open(new_path, "wb") as f:
+        f.write(contents)
 
 
 """
