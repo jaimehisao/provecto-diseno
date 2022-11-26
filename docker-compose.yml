@@ -1,19 +1,5 @@
 version: '3.8'
 services:
-  python-backend:
-    build: ./backend
-    container_name: python-backend
-    ports:
-      - '4000:4000'
-    links:
-      - mongo
-  react-frontend:
-    build: ./frontend
-    container_name: react-frontend
-    ports:
-      - '6000:6000'
-    links:
-      - python-backend
   mongo:
     image: mongo
     container_name: mongo
@@ -24,3 +10,19 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: admin
+  python-backend:
+    build: ./backend
+    container_name: python-backend
+    ports:
+      - '4000:4000'
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  react-frontend:
+    build: ./frontend
+    container_name: react-frontend
+    ports:
+      - '6000:6000'
+    links:
+      - python-backend
