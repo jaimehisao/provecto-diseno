@@ -14,11 +14,7 @@ from dto.comment import Comment
 
 app = FastAPI()
 
-origins = [
-    "https://react-frontend",
-    "http://localhost",
-    "http://localhost:6000",
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
